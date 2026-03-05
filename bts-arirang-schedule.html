@@ -1,0 +1,1314 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BTS WORLD TOUR 'ARIRANG' — Schedule</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans+JP:wght@300;400;500;700&family=DM+Mono:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<style>
+:root {
+  --red:    #E8174B;
+  --red2:   #ff2d5e;
+  --dark:   #080808;
+  --surface:#111114;
+  --card:   #16161a;
+  --card2:  #1c1c21;
+  --border: #252528;
+  --border2:#333338;
+  --text:   #EDEAE6;
+  --sub:    #a0a0a8;
+  --muted:  #5a5a62;
+  --gold:   #D4A843;
+  --green:  #34C975;
+  --blue:   #4DA8E0;
+  --purple: #A06ED4;
+  --orange: #F07040;
+  --radius: 6px;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+
+body{
+  background:var(--dark);
+  color:var(--text);
+  font-family:'Noto Sans JP',sans-serif;
+  font-weight:300;
+  min-height:100vh;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ── HERO ── */
+.hero{
+  position:relative;
+  background:var(--dark);
+  overflow:hidden;
+  border-bottom:1px solid var(--border);
+}
+
+.hero-bg{
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(ellipse 60% 80% at 80% 50%, rgba(232,23,75,0.07) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 60% at 20% 80%, rgba(100,30,60,0.06) 0%, transparent 60%);
+  pointer-events:none;
+}
+
+.hero-watermark{
+  position:absolute;
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(100px,22vw,260px);
+  color:rgba(255,255,255,0.025);
+  letter-spacing:0.04em;
+  top:50%;left:50%;
+  transform:translate(-50%,-52%);
+  white-space:nowrap;
+  pointer-events:none;
+  user-select:none;
+}
+
+.hero-inner{
+  position:relative;
+  z-index:1;
+  max-width:900px;
+  margin:0 auto;
+  padding:48px 28px 36px;
+}
+
+.hero-eyebrow{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-bottom:18px;
+}
+
+.hero-pill{
+  background:var(--red);
+  color:#fff;
+  font-family:'Bebas Neue',sans-serif;
+  font-size:12px;
+  letter-spacing:0.3em;
+  padding:3px 12px 2px;
+  border-radius:2px;
+}
+
+.hero-year{
+  font-family:'DM Mono',monospace;
+  font-size:11px;
+  color:var(--muted);
+  letter-spacing:0.2em;
+}
+
+.hero-title-row{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:16px;
+  margin-bottom:6px;
+}
+
+.hero-title{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(52px,10vw,100px);
+  line-height:.88;
+  letter-spacing:0.04em;
+  color:#fff;
+}
+
+.hero-title em{
+  font-style:normal;
+  color:var(--red);
+}
+
+.hero-subtitle{
+  font-family:'DM Mono',monospace;
+  font-size:11px;
+  color:var(--muted);
+  letter-spacing:0.25em;
+  margin-bottom:32px;
+  text-transform:uppercase;
+}
+
+/* Calendar button */
+.cal-toggle-btn{
+  flex-shrink:0;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:5px;
+  background:rgba(255,255,255,0.04);
+  border:1px solid var(--border2);
+  color:var(--sub);
+  padding:12px 16px 10px;
+  cursor:pointer;
+  border-radius:var(--radius);
+  transition:all .2s;
+  margin-top:4px;
+  min-width:64px;
+}
+.cal-toggle-btn:hover{background:rgba(232,23,75,0.1);border-color:rgba(232,23,75,.4);color:var(--text);}
+.cal-toggle-btn.active{background:rgba(232,23,75,0.15);border-color:var(--red);color:#fff;}
+.cal-toggle-icon{font-size:22px;line-height:1;}
+.cal-toggle-label{font-family:'Bebas Neue',sans-serif;font-size:11px;letter-spacing:.2em;}
+
+/* Hero stats */
+.hero-stats{
+  display:flex;
+  gap:0;
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  overflow:hidden;
+  width:fit-content;
+}
+.stat{
+  padding:12px 20px;
+  border-right:1px solid var(--border);
+  text-align:center;
+  min-width:80px;
+}
+.stat:last-child{border-right:none;}
+.stat-num{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:28px;
+  line-height:1;
+  color:#fff;
+}
+.stat-label{
+  font-family:'DM Mono',monospace;
+  font-size:9px;
+  letter-spacing:.2em;
+  color:var(--muted);
+  margin-top:2px;
+}
+
+/* ── CALENDAR PANEL ── */
+.cal-panel{
+  display:none;
+  background:var(--surface);
+  border-bottom:2px solid var(--red);
+}
+.cal-panel.open{display:block;}
+
+.cal-panel-inner{
+  max-width:900px;
+  margin:0 auto;
+  padding:24px 28px 28px;
+}
+
+.cal-nav{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:18px;
+}
+.cal-nav-btn{
+  background:var(--card);
+  border:1px solid var(--border2);
+  color:var(--sub);
+  width:36px;height:36px;
+  border-radius:var(--radius);
+  cursor:pointer;
+  font-size:18px;
+  display:flex;align-items:center;justify-content:center;
+  transition:all .15s;
+}
+.cal-nav-btn:hover{background:var(--card2);color:var(--text);}
+.cal-month-label{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:24px;
+  letter-spacing:.15em;
+  color:var(--text);
+}
+.cal-grid{
+  display:grid;
+  grid-template-columns:repeat(7,1fr);
+  gap:3px;
+}
+.cal-dow{
+  text-align:center;
+  font-family:'DM Mono',monospace;
+  font-size:9px;
+  letter-spacing:.15em;
+  color:var(--muted);
+  padding:6px 0;
+}
+.cal-dow:first-child{color:#e07070;}
+.cal-dow:last-child{color:#7090e8;}
+.cal-day{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:4px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  padding:5px 2px 4px;
+  min-height:46px;
+  position:relative;
+  transition:background .15s;
+}
+.cal-day.empty{background:transparent;border-color:transparent;}
+.cal-day.has-events{cursor:pointer;border-color:var(--border2);}
+.cal-day.has-events:hover{background:var(--card2);}
+.cal-day.is-today{border-color:var(--red);}
+.cal-day-num{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:15px;
+  line-height:1;
+  color:var(--muted);
+}
+.cal-day.has-events .cal-day-num{color:var(--text);}
+.cal-day.is-today .cal-day-num{color:var(--red);}
+.cal-dots{display:flex;gap:2px;flex-wrap:wrap;justify-content:center;margin-top:3px;}
+.cal-dot{width:5px;height:5px;border-radius:50%;flex-shrink:0;}
+
+/* Cal popup */
+.cal-popup-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:500;}
+.cal-popup-overlay.open{display:block;}
+.cal-popup{
+  display:none;
+  position:fixed;
+  bottom:0;left:0;right:0;
+  background:#18181d;
+  border-top:2px solid var(--red);
+  border-radius:16px 16px 0 0;
+  padding:20px 20px 36px;
+  z-index:600;
+  max-height:80vh;
+  overflow-y:auto;
+}
+.cal-popup.open{display:block;animation:slideUp .25s ease;}
+@keyframes slideUp{from{transform:translateY(30px);opacity:0;}to{transform:translateY(0);opacity:1;}}
+.cal-popup-date{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:22px;
+  letter-spacing:.1em;
+  color:var(--red);
+  margin-bottom:14px;
+}
+.cal-popup-events{display:flex;flex-direction:column;gap:8px;margin-bottom:16px;}
+.cal-popup-event{
+  background:var(--card);
+  border:1px solid var(--border2);
+  border-radius:var(--radius);
+  padding:11px 14px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  cursor:pointer;
+  transition:background .15s;
+}
+.cal-popup-event:hover{background:var(--card2);}
+.cal-popup-event-bar{width:3px;height:32px;border-radius:2px;flex-shrink:0;}
+.cal-popup-event-type{font-size:9px;letter-spacing:.2em;color:var(--muted);margin-bottom:2px;font-family:'DM Mono',monospace;}
+.cal-popup-event-name{font-size:14px;font-weight:500;line-height:1.3;}
+.cal-popup-arrow{margin-left:auto;color:var(--muted);font-size:18px;}
+.cal-popup-close{
+  width:100%;
+  background:transparent;
+  border:1px solid var(--border2);
+  border-radius:var(--radius);
+  color:var(--muted);
+  font-family:'Bebas Neue',sans-serif;
+  font-size:15px;
+  letter-spacing:.15em;
+  padding:10px;
+  cursor:pointer;
+  transition:all .2s;
+}
+.cal-popup-close:hover{border-color:var(--red);color:var(--red);}
+
+/* ── TABS ── */
+.tabs-bar{
+  position:sticky;
+  top:0;
+  z-index:100;
+  background:rgba(8,8,8,.92);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+}
+.tabs-inner{
+  max-width:900px;
+  margin:0 auto;
+  padding:0 28px;
+  display:flex;
+  gap:0;
+  overflow-x:auto;
+  scrollbar-width:none;
+}
+.tabs-inner::-webkit-scrollbar{display:none;}
+.tab{
+  flex-shrink:0;
+  padding:14px 18px 12px;
+  font-family:'Bebas Neue',sans-serif;
+  font-size:15px;
+  letter-spacing:.15em;
+  color:var(--muted);
+  cursor:pointer;
+  border-bottom:2px solid transparent;
+  transition:all .2s;
+  white-space:nowrap;
+  position:relative;
+  top:1px;
+}
+.tab:hover{color:var(--sub);}
+.tab.active{color:#fff;border-bottom-color:var(--red);}
+
+/* ── MAIN CONTENT ── */
+.main{
+  max-width:900px;
+  margin:0 auto;
+  padding:28px 28px 80px;
+}
+
+/* ── LEGEND ── */
+.legend{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-bottom:20px;
+}
+.legend-item{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  font-family:'DM Mono',monospace;
+  font-size:10px;
+  color:var(--muted);
+  letter-spacing:.1em;
+}
+.legend-dot{width:8px;height:8px;border-radius:2px;}
+
+/* ── FILTER BAR ── */
+.filter-bar{
+  display:flex;
+  gap:6px;
+  margin-bottom:24px;
+  flex-wrap:wrap;
+}
+.filter-btn{
+  padding:6px 14px;
+  background:transparent;
+  border:1px solid var(--border2);
+  color:var(--muted);
+  font-family:'Bebas Neue',sans-serif;
+  font-size:13px;
+  letter-spacing:.12em;
+  cursor:pointer;
+  border-radius:var(--radius);
+  transition:all .2s;
+}
+.filter-btn:hover{border-color:var(--sub);color:var(--sub);}
+.filter-btn.active{background:var(--red);border-color:var(--red);color:#fff;}
+
+/* ── MONTH DIVIDER ── */
+.month-divider{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  margin:30px 0 14px;
+}
+.month-divider::before,.month-divider::after{
+  content:'';flex:1;
+  height:1px;
+  background:var(--border);
+}
+.month-divider span{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:12px;
+  letter-spacing:.28em;
+  color:var(--muted);
+  white-space:nowrap;
+}
+
+/* ── TIMELINE ── */
+.timeline{display:flex;flex-direction:column;gap:8px;}
+
+/* ── EVENT CARD ── */
+.event-card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  display:flex;
+  align-items:stretch;
+  cursor:pointer;
+  transition:border-color .18s, background .18s;
+  position:relative;
+  overflow:hidden;
+}
+.event-card:hover{
+  background:var(--card2);
+  border-color:var(--border2);
+}
+.event-card.passed{opacity:.4;}
+.event-card.today{
+  border-color:var(--red);
+  background:rgba(232,23,75,.05);
+}
+.event-card.today:hover{background:rgba(232,23,75,.09);}
+
+/* Left accent stripe */
+.card-stripe{
+  width:3px;
+  flex-shrink:0;
+  border-radius:var(--radius) 0 0 var(--radius);
+}
+
+/* Date column */
+.card-date{
+  flex-shrink:0;
+  width:52px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  padding:14px 4px;
+  border-right:1px solid var(--border);
+  text-align:center;
+  gap:0;
+}
+.card-date-mon{
+  font-family:'DM Mono',monospace;
+  font-size:10px;
+  letter-spacing:.12em;
+  color:var(--muted);
+  line-height:1;
+  text-transform:uppercase;
+}
+.card-date-day{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:28px;
+  line-height:1.05;
+  color:#fff;
+}
+.card-date-dow{
+  font-family:'DM Mono',monospace;
+  font-size:9px;
+  letter-spacing:.1em;
+  color:var(--muted);
+}
+.card-date-year{
+  font-family:'DM Mono',monospace;
+  font-size:9px;
+  color:var(--red);
+  letter-spacing:.08em;
+  margin-top:1px;
+}
+
+/* Body */
+.card-body{
+  flex:1;
+  min-width:0;
+  padding:13px 14px 13px 16px;
+  display:flex;
+  flex-direction:column;
+  gap:4px;
+}
+.card-top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+  margin-bottom:1px;
+}
+.card-type{
+  font-family:'DM Mono',monospace;
+  font-size:9px;
+  letter-spacing:.18em;
+  color:var(--muted);
+  text-transform:uppercase;
+  flex-shrink:0;
+}
+.card-name{
+  font-size:14.5px;
+  font-weight:500;
+  color:var(--text);
+  line-height:1.35;
+}
+.card-detail{
+  display:flex;
+  flex-direction:column;
+  gap:1px;
+}
+.detail-line{
+  font-size:11.5px;
+  color:var(--sub);
+  line-height:1.5;
+}
+
+/* JST row */
+.jst-row{
+  display:flex;
+  align-items:center;
+  gap:7px;
+  margin-top:6px;
+  background:rgba(255,255,255,.03);
+  border:1px solid rgba(255,255,255,.06);
+  border-radius:4px;
+  padding:5px 10px;
+}
+.jst-flag{font-size:12px;line-height:1;}
+.jst-text{font-size:11px;color:var(--sub);}
+.jst-text strong{color:var(--text);font-weight:500;}
+.jst-diff{
+  margin-left:auto;
+  font-family:'DM Mono',monospace;
+  font-size:10px;
+  color:var(--gold);
+  letter-spacing:.08em;
+  flex-shrink:0;
+}
+
+/* Tags */
+.card-tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:5px;}
+.tag{
+  font-family:'DM Mono',monospace;
+  font-size:9px;
+  padding:2px 7px;
+  border-radius:3px;
+  letter-spacing:.1em;
+  border:1px solid currentColor;
+  line-height:1.4;
+}
+.tag-jp{color:var(--gold);}
+.tag-global{color:var(--blue);}
+.tag-fc{color:var(--green);}
+.tag-mobile{color:var(--orange);}
+.tag-army{color:var(--purple);}
+.tag-free{color:var(--red);}
+
+/* Ticket + memo row */
+.card-actions{display:flex;align-items:center;gap:8px;margin-top:8px;flex-wrap:wrap;}
+.ticket-link{
+  display:inline-flex;
+  align-items:center;
+  gap:4px;
+  background:transparent;
+  border:1px solid var(--red);
+  color:var(--red);
+  font-family:'Bebas Neue',sans-serif;
+  font-size:12px;
+  letter-spacing:.12em;
+  padding:5px 12px;
+  border-radius:4px;
+  text-decoration:none;
+  transition:all .18s;
+  cursor:pointer;
+  white-space:nowrap;
+}
+.ticket-link:hover{background:var(--red);color:#fff;}
+.ticket-link.tba{
+  border-color:var(--border2);
+  color:var(--muted);
+  cursor:default;
+  pointer-events:none;
+}
+
+/* Days badge */
+.days-badge{
+  font-family:'DM Mono',monospace;
+  font-size:10px;
+  letter-spacing:.08em;
+  padding:2px 8px;
+  border-radius:3px;
+  white-space:nowrap;
+  flex-shrink:0;
+}
+.badge-today{background:var(--red);color:#fff;font-family:'Bebas Neue',sans-serif;font-size:12px;letter-spacing:.15em;}
+.badge-passed{color:var(--muted);border:1px solid var(--border2);}
+.badge-soon{color:var(--gold);border:1px solid rgba(212,168,67,.3);}
+.badge-verysoon{color:var(--red);border:1px solid rgba(232,23,75,.4);animation:blink 1.6s ease-in-out infinite;}
+.badge-normal{color:var(--muted);}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:.55;}}
+
+/* Memo dot */
+.memo-dot{
+  display:inline-block;
+  width:6px;height:6px;
+  background:var(--gold);
+  border-radius:50%;
+  margin-left:6px;
+  vertical-align:middle;
+  flex-shrink:0;
+}
+
+/* Memo area */
+.memo-area{
+  display:none;
+  margin-top:10px;
+  padding-top:10px;
+  border-top:1px solid var(--border);
+}
+.memo-area.open{display:block;}
+.memo-label{
+  font-family:'DM Mono',monospace;
+  font-size:9px;
+  letter-spacing:.2em;
+  color:var(--muted);
+  margin-bottom:6px;
+}
+.memo-input{
+  width:100%;
+  background:#0d0d10;
+  border:1px solid var(--border2);
+  border-radius:4px;
+  color:var(--text);
+  font-family:'Noto Sans JP',sans-serif;
+  font-size:13px;
+  padding:9px 12px;
+  resize:vertical;
+  min-height:58px;
+  outline:none;
+  transition:border-color .2s;
+}
+.memo-input:focus{border-color:var(--red);}
+.memo-row{display:flex;align-items:center;gap:10px;margin-top:7px;}
+.memo-save-btn{
+  background:var(--red);
+  color:#fff;
+  border:none;
+  border-radius:4px;
+  font-family:'Bebas Neue',sans-serif;
+  font-size:13px;
+  letter-spacing:.12em;
+  padding:6px 16px;
+  cursor:pointer;
+  transition:background .18s;
+}
+.memo-save-btn:hover{background:#c41240;}
+.memo-saved-msg{
+  font-size:11px;
+  color:var(--green);
+  display:none;
+  font-family:'DM Mono',monospace;
+  letter-spacing:.1em;
+}
+
+/* ── MEMO TAB ── */
+.memo-list{display:flex;flex-direction:column;gap:10px;}
+.memo-entry{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:15px 18px;
+  border-left-width:3px;
+}
+.memo-entry-date{
+  font-family:'DM Mono',monospace;
+  font-size:10px;
+  letter-spacing:.15em;
+  color:var(--muted);
+  margin-bottom:3px;
+}
+.memo-entry-name{font-size:14px;font-weight:500;margin-bottom:7px;}
+.memo-entry-text{font-size:12.5px;color:var(--sub);line-height:1.65;white-space:pre-wrap;}
+
+/* ── EMPTY STATE ── */
+.empty-state{
+  text-align:center;
+  padding:80px 20px;
+  color:var(--muted);
+}
+.empty-icon{font-size:44px;margin-bottom:14px;opacity:.6;}
+.empty-text{font-size:13px;line-height:1.8;color:var(--muted);}
+
+/* ── SCROLL TOP ── */
+.scroll-top{
+  position:fixed;
+  bottom:24px;right:24px;
+  width:42px;height:42px;
+  background:var(--red);
+  color:#fff;
+  border:none;
+  border-radius:50%;
+  font-size:18px;
+  cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;
+  transition:opacity .3s,transform .3s;
+  z-index:200;
+  transform:translateY(8px);
+  box-shadow:0 4px 16px rgba(232,23,75,.35);
+}
+.scroll-top.visible{opacity:1;transform:translateY(0);}
+.scroll-top:hover{transform:scale(1.08);}
+
+/* ── ANIMATIONS ── */
+.event-card{animation:fadeUp .3s ease both;}
+.event-card:nth-child(n){animation-delay:calc(var(--i,0)*0.02s);}
+@keyframes fadeUp{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+
+/* ── RESPONSIVE ── */
+@media(max-width:600px){
+  .hero-inner{padding:36px 18px 28px;}
+  .main{padding:20px 16px 80px;}
+  .tabs-inner{padding:0 16px;}
+  .cal-panel-inner{padding:18px 16px 22px;}
+  .hero-stats{width:100%;}
+  .stat{flex:1;padding:10px 12px;}
+  .card-date{width:44px;}
+  .card-date-day{font-size:22px;}
+  .card-body{padding:11px 12px 11px 13px;}
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-watermark">ARIRANG</div>
+  <div class="hero-inner">
+    <div class="hero-eyebrow">
+      <span class="hero-pill">BTS WORLD TOUR</span>
+      <span class="hero-year">2026 — 2027</span>
+    </div>
+    <div class="hero-title-row">
+      <h1 class="hero-title">ARIRANG<br><em>'26–'27</em></h1>
+      <button class="cal-toggle-btn" id="cal-toggle-btn" onclick="toggleCalendarPanel()">
+        <span class="cal-toggle-icon">📅</span>
+        <span class="cal-toggle-label">CALENDAR</span>
+      </button>
+    </div>
+    <div class="hero-subtitle">82 SHOWS · 29 CITIES · 18 COUNTRIES</div>
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-num">82</div>
+        <div class="stat-label">SHOWS</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">29</div>
+        <div class="stat-label">CITIES</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">18</div>
+        <div class="stat-label">COUNTRIES</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num" id="days-to-start">—</div>
+        <div class="stat-label">DAYS TO GO</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CALENDAR PANEL -->
+<div class="cal-panel" id="cal-panel">
+  <div class="cal-panel-inner">
+    <div class="cal-nav">
+      <button class="cal-nav-btn" id="cal-prev">&#8592;</button>
+      <div class="cal-month-label" id="cal-month-label"></div>
+      <button class="cal-nav-btn" id="cal-next">&#8594;</button>
+    </div>
+    <div class="cal-grid" id="cal-grid"></div>
+  </div>
+</div>
+<div class="cal-popup-overlay" id="cal-overlay" onclick="closeCalPopup()"></div>
+<div class="cal-popup" id="cal-popup">
+  <div class="cal-popup-date" id="cal-popup-date"></div>
+  <div class="cal-popup-events" id="cal-popup-events"></div>
+  <button class="cal-popup-close" onclick="closeCalPopup()">&#x2715; 閉じる</button>
+</div>
+
+<!-- TABS -->
+<div class="tabs-bar">
+  <div class="tabs-inner">
+    <div class="tab active" onclick="showTab('all')">すべて</div>
+    <div class="tab" onclick="showTab('ticket')">🎫 チケット申込</div>
+    <div class="tab" onclick="showTab('concert')">🎤 コンサート</div>
+    <div class="tab" onclick="showTab('memos')">📝 マイメモ</div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- ALL tab -->
+  <div id="tab-all">
+    <div class="legend">
+      <div class="legend-item"><div class="legend-dot" style="background:var(--red)"></div>コンサート</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--gold)"></div>日本チケット</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--blue)"></div>グローバルチケット</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--green)"></div>当落発表</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--purple)"></div>アルバム・特別</div>
+    </div>
+    <div class="filter-bar">
+      <button class="filter-btn active" onclick="setFilter('all',this)">ALL</button>
+      <button class="filter-btn" onclick="setFilter('passed',this)">終了済み</button>
+      <button class="filter-btn" onclick="setFilter('upcoming',this)">今後の予定</button>
+    </div>
+    <div class="timeline" id="timeline-all"></div>
+  </div>
+
+  <!-- TICKET tab -->
+  <div id="tab-ticket" style="display:none">
+    <div class="timeline" id="timeline-ticket"></div>
+  </div>
+
+  <!-- CONCERT tab -->
+  <div id="tab-concert" style="display:none">
+    <div class="legend">
+      <div class="legend-item"><div class="legend-dot" style="background:var(--red)"></div>コンサート</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--purple)"></div>アルバム・特別イベント</div>
+    </div>
+    <div class="timeline" id="timeline-concert"></div>
+  </div>
+
+  <!-- MEMO tab -->
+  <div id="tab-memos" style="display:none">
+    <div class="memo-list" id="memo-list"></div>
+  </div>
+
+</div>
+
+<button class="scroll-top" id="scroll-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+const TODAY = new Date();
+TODAY.setHours(0,0,0,0);
+
+// ====== EVENTS DATA ======
+const EVENTS = [
+  // ALBUM & SPECIAL
+  {id:'album-preorder',date:'2026-01-16',type:'album',typeLabel:'ALBUM',name:'5th Album「ARIRANG」予約開始',detail:'11:00 KST',tags:['global']},
+  {id:'album-release',date:'2026-03-20',type:'album',typeLabel:'ALBUM RELEASE',name:'BTS 5th Album「ARIRANG」リリース',detail:'韓国：3月20日（金）13:00 KST\n日本：3月21日（土）CDショップ店頭・オンライン順次\n全14曲収録 / Deluxe Vinylのみ4月3日発売',tags:['global']},
+  {id:'comeback-live',date:'2026-03-21',type:'special',typeLabel:'SPECIAL EVENT',name:'BTS THE COMEBACK LIVE | ARIRANG',detail:'20:00 KST / 光化門広場（ソウル）\n全席無料・要予約（NOLチケット 2/23 20:00〜）\nNetflix 190か国以上で世界同時独占生中継\n所要時間：約1時間',tags:['free']},
+  {id:'documentary',date:'2026-03-27',type:'special',typeLabel:'DOCUMENTARY',name:'ドキュメンタリー映画「BTS: THE RETURN」Netflix配信開始',detail:'軍服務後の再会〜「ARIRANG」制作過程を密着\nNetflix独占・約3年9ヶ月ぶりの完全体カムバックの舞台裏',tags:[]},
+  // JAPAN TICKETS
+  {id:'jp-fc1-start',date:'2026-01-22',type:'ticket-jp',typeLabel:'チケット申し込み',name:'🇯🇵 FC会員 1次先行 受付開始',detail:'21:00〜 / ローソンチケット\nBTS JAPAN OFFICIAL FANCLUB会員対象',tags:['jp','fc']},
+  {id:'jp-fc1-end',date:'2026-01-29',type:'ticket-jp',typeLabel:'チケット申し込み',name:'🇯🇵 FC会員 1次先行 受付終了',detail:'23:59まで',tags:['jp','fc']},
+  {id:'jp-fc1-result',date:'2026-02-06',type:'result',typeLabel:'当落発表',name:'🇯🇵 FC会員 1次先行 当落発表・入金開始',detail:'12:00〜 / 入金期限：2月9日(月) 23:00まで',tags:['jp','fc']},
+  {id:'jp-mobile1-start',date:'2026-02-05',type:'ticket-jp',typeLabel:'チケット申し込み',name:'🇯🇵 モバイル会員 1次先行 受付開始',detail:'13:00〜 / ローソンチケット\nBTS JAPAN OFFICIAL MOBILE会員対象',tags:['jp','mobile']},
+  {id:'jp-mobile1-end',date:'2026-02-10',type:'ticket-jp',typeLabel:'チケット申し込み',name:'🇯🇵 モバイル会員 1次先行 受付終了',detail:'23:59まで（2/5(木)13:00〜2/10(火)23:59）',tags:['jp','mobile']},
+  {id:'jp-mobile1-result',date:'2026-02-19',type:'result',typeLabel:'当落発表',name:'🇯🇵 モバイル会員 1次先行 当落発表・入金開始',detail:'11:00〜 / 入金期限：2月23日(月) 23:00まで',tags:['jp','mobile']},
+  // GLOBAL ARMY
+  {id:'army-signup-deadline',date:'2026-01-18',type:'ticket-global',typeLabel:'ARMY PRESALE',name:'🌍 ARMY Membership先行 Weverse登録締切',detail:'15:00 PT / 18:00 ET / 翌0:00 CET\n北米・欧州公演対象',tags:['army','global']},
+  {id:'army-presale-start',date:'2026-01-22',type:'ticket-global',typeLabel:'ARMY PRESALE',name:'🌍 ARMY Membership先行 開始（北米・欧州）',detail:'時間は会場によって異なる / Ticketmaster',tags:['army','global']},
+  {id:'army-presale-jp-reg',date:'2026-02-13',type:'ticket-global',typeLabel:'ARMY PRESALE',name:'🌍 ARMY先行 日本 Weverse登録締切',detail:'23:59 JST',tags:['army','jp']},
+  {id:'army-presale-jp-start',date:'2026-02-20',type:'ticket-global',typeLabel:'ARMY PRESALE',name:'🌍 ARMY Membership先行 開始（日本）',detail:'13:00 JST / ローソンチケット',tags:['army','jp']},
+  // JP FC 2次
+  {id:'jp-fc2-start',date:'2026-03-02',type:'ticket-jp',typeLabel:'チケット申し込み',name:'🇯🇵 FC会員 2次先行 受付開始',detail:'13:00〜3月8日(日) 23:59まで\nBTS JAPAN OFFICIAL FANCLUB会員のみ対象\n（モバイル・ARMY Membership会員は対象外）',tags:['jp','fc']},
+  {id:'jp-mobile2-start',date:'2026-03-02',type:'ticket-jp',typeLabel:'チケット申し込み',name:'🇯🇵 モバイル会員 2次先行 受付開始',detail:'13:00〜3月8日(日) 23:59まで\nBTS JAPAN OFFICIAL MOBILE会員のみ対象',tags:['jp','mobile']},
+  {id:'jp-fc2-end',date:'2026-03-08',type:'ticket-jp',typeLabel:'チケット申し込み',name:'🇯🇵 FC会員・モバイル会員 2次先行 受付終了',detail:'23:59まで',tags:['jp','fc','mobile']},
+  // SOUNDCHECK
+  {id:'soundcheck-1-apply',date:'2026-01-16',type:'special',typeLabel:'サウンドチェック',name:'🎵 東京ドーム サウンドチェック 第1回応募',detail:'〜2月1日(日) 23:59 / Weverse Shop・UNIVERSAL MUSIC STORE\n当選発表：2月6日(金) 19:00頃',tags:['jp']},
+  {id:'soundcheck-2-apply',date:'2026-02-09',type:'special',typeLabel:'サウンドチェック',name:'🎵 東京ドーム サウンドチェック 第2回応募',detail:'〜2月23日(月・祝) 23:59 / Weverse Shop・UNIVERSAL MUSIC STORE\n当選発表：3月2日(月) 19:00頃',tags:['jp']},
+  // CONCERTS
+  {id:'goyang-1',date:'2026-04-09',type:'concert',typeLabel:'🎤 CONCERT',name:'高陽（韓国）Day 1',detail:'GOYANG STADIUM / 19:00 KST\nライブビューイング(4/11)あり',tags:[],ticket:'https://tickets.interpark.com/goods/26000547'},
+  {id:'goyang-2',date:'2026-04-11',type:'concert',typeLabel:'🎤 CONCERT',name:'高陽（韓国）Day 2',detail:'GOYANG STADIUM / 19:00 KST\nライブビューイング 世界80以上の地域・劇場で上映',tags:[],ticket:'https://tickets.interpark.com/goods/26000547'},
+  {id:'goyang-3',date:'2026-04-12',type:'concert',typeLabel:'🎤 CONCERT',name:'高陽（韓国）Day 3',detail:'GOYANG STADIUM / 19:00 KST',tags:[],ticket:'https://tickets.interpark.com/goods/26000547'},
+  {id:'tokyo-1',date:'2026-04-17',type:'concert',typeLabel:'🎤 CONCERT JAPAN',name:'🗾 東京ドーム Day 1',detail:'TOKYO DOME / 開場16:30 / 開演18:30\nサウンドチェックイベント 15:30〜（当選者のみ）',tags:['jp'],ticket:'https://www.hybejapan.events/bts/arirang_in_japan',jst:{local:'2026/04/17(金)',diff:'JST +0h'}},
+  {id:'tokyo-2',date:'2026-04-18',type:'concert',typeLabel:'🎤 CONCERT JAPAN',name:'🗾 東京ドーム Day 2',detail:'TOKYO DOME / 開場13:00 / 開演15:00\nサウンドチェックイベント 12:00〜（当選者のみ）\nライブビューイング 世界75か国・3,500館以上',tags:['jp'],ticket:'https://www.hybejapan.events/bts/arirang_in_japan',jst:{local:'2026/04/18(土)',diff:'JST +0h'}},
+  {id:'tampa-1',date:'2026-04-25',type:'concert',typeLabel:'🎤 CONCERT',name:'タンパ（アメリカ）Day 1',detail:'RAYMOND JAMES STADIUM\n開演 19:00 ET / 翌08:00 JST',tags:[],ticket:'https://btsworldtourofficial.com/',jst:{local:'2026/04/24(金)',diff:'JST +13h'}},
+  {id:'tampa-2',date:'2026-04-26',type:'concert',typeLabel:'🎤 CONCERT',name:'タンパ（アメリカ）Day 2',detail:'RAYMOND JAMES STADIUM\n開演 19:00 ET / 翌08:00 JST',tags:[],ticket:'https://btsworldtourofficial.com/',jst:{local:'2026/04/25(土)',diff:'JST +13h'}},
+  {id:'tampa-3',date:'2026-04-28',type:'concert',typeLabel:'🎤 CONCERT',name:'タンパ（アメリカ）Day 3',detail:'RAYMOND JAMES STADIUM\n開演 19:00 ET / 翌08:00 JST',tags:[],ticket:'https://btsworldtourofficial.com/',jst:{local:'2026/04/27(月)',diff:'JST +13h'}},
+  {id:'elpaso-1',date:'2026-05-02',type:'concert',typeLabel:'🎤 CONCERT',name:'エルパソ（アメリカ）Day 1',detail:'SUN BOWL STADIUM\n開演 19:00 MT / 翌10:00 JST',tags:[],ticket:'https://btsworldtourofficial.com/',jst:{local:'2026/05/01(金)',diff:'JST +15h'}},
+  {id:'elpaso-2',date:'2026-05-03',type:'concert',typeLabel:'🎤 CONCERT',name:'エルパソ（アメリカ）Day 2',detail:'SUN BOWL STADIUM\n開演 19:00 MT / 翌10:00 JST',tags:[],ticket:'https://btsworldtourofficial.com/',jst:{local:'2026/05/02(土)',diff:'JST +15h'}},
+  {id:'mexicocity-1',date:'2026-05-07',type:'concert',typeLabel:'🎤 CONCERT',name:'メキシコシティ（メキシコ）Day 1',detail:'ESTADIO GNP SEGUROS\n開演 20:00 CST / 翌11:00 JST',tags:[],ticket:'https://btsworldtourofficial.com/',jst:{local:'2026/05/06(水)',diff:'JST +15h'}},
+  {id:'mexicocity-2',date:'2026-05-09',type:'concert',typeLabel:'🎤 CONCERT',name:'メキシコシティ（メキシコ）Day 2',detail:'ESTADIO GNP SEGUROS\n開演 20:00 CST / 翌11:00 JST',tags:[],ticket:'https://btsworldtourofficial.com/',jst:{local:'2026/05/08(金)',diff:'JST +15h'}},
+  {id:'mexicocity-3',date:'2026-05-10',type:'concert',typeLabel:'🎤 CONCERT',name:'メキシコシティ（メキシコ）Day 3',detail:'ESTADIO GNP SEGUROS\n開演 20:00 CST / 翌11:00 JST',tags:[],ticket:'https://btsworldtourofficial.com/',jst:{local:'2026/05/09(土)',diff:'JST +15h'}},
+  {id:'stanford-1',date:'2026-05-16',type:'concert',typeLabel:'🎤 CONCERT',name:'スタンフォード（アメリカ）Day 1',detail:'STANFORD STADIUM\n開演 19:00 PT / 翌11:00 JST',tags:[],ticket:'https://btsworldtourofficial.com/',jst:{local:'2026/05/15(金)',diff:'JST +16h'}},
+  {id:'stanford-2',date:'2026-05-17',type:'concert',typeLabel:'🎤 CONCERT',name:'スタンフォード（アメリカ）Day 2',detail:'STANFORD STADIUM\n開演 19:00 PT / 翌11:00 JST',tags:[],ticket:'https://btsworldtourofficial.com/',jst:{local:'2026/05/16(土)',diff:'JST +16h'}},
+  {id:'stanford-3',date:'2026-05-19',type:'concert',typeLabel:'🎤 CONCERT',name:'スタンフォード（アメリカ）Day 3',detail:'STANFORD STADIUM\n開演 19:00 PT / 翌11:00 JST',tags:[],ticket:'https://btsworldtourofficial.com/',jst:{local:'2026/05/18(月)',diff:'JST +16h'}},
+  {id:'lasvegas-1',date:'2026-05-23',type:'concert',typeLabel:'🎤 CONCERT',name:'ラスベガス（アメリカ）Day 1',detail:'ALLEGIANT STADIUM\n開演 19:00 PT / 翌11:00 JST',tags:[],ticket:'https://btsworldtourofficial.com/',jst:{local:'2026/05/22(金)',diff:'JST +16h'}},
+  {id:'lasvegas-2',date:'2026-05-24',type:'concert',typeLabel:'🎤 CONCERT',name:'ラスベガス（アメリカ）Day 2',detail:'ALLEGIANT STADIUM\n開演 19:00 PT / 翌11:00 JST',tags:[],ticket:'https://btsworldtourofficial.com/',jst:{local:'2026/05/23(土)',diff:'JST +16h'}},
+  {id:'lasvegas-3',date:'2026-05-27',type:'concert',typeLabel:'🎤 CONCERT',name:'ラスベガス（アメリカ）Day 3',detail:'ALLEGIANT STADIUM\n開演 19:00 PT / 翌11:00 JST',tags:[],ticket:'https://btsworldtourofficial.com/',jst:{local:'2026/05/26(火)',diff:'JST +16h'}},
+  {id:'lasvegas-4',date:'2026-05-28',type:'concert',typeLabel:'🎤 CONCERT',name:'ラスベガス（アメリカ）Day 4',detail:'ALLEGIANT STADIUM\n開演 19:00 PT / 翌11:00 JST',tags:[],ticket:'https://btsworldtourofficial.com/',jst:{local:'2026/05/27(水)',diff:'JST +16h'}},
+  {id:'busan-1',date:'2026-06-12',type:'concert',typeLabel:'🎤 CONCERT',name:'釜山（韓国）Day 1',detail:'STAY TUNED',tags:[],ticket:null,jst:{local:'2026/06/12(金)',diff:'JST +0h'}},
+  {id:'busan-2',date:'2026-06-13',type:'concert',typeLabel:'🎤 CONCERT',name:'釜山（韓国）Day 2',detail:'STAY TUNED',tags:[],ticket:null,jst:{local:'2026/06/13(土)',diff:'JST +0h'}},
+  {id:'madrid-1',date:'2026-06-26',type:'concert',typeLabel:'🎤 CONCERT',name:'マドリード（スペイン）Day 1',detail:'RIYADH AIR METROPOLITANO\n開演 20:00 CEST / 翌03:00 JST',tags:[],ticket:'https://btsworldtourofficial.com/',jst:{local:'2026/06/25(木)',diff:'JST +7h'}},
+  {id:'madrid-2',date:'2026-06-27',type:'concert',typeLabel:'🎤 CONCERT',name:'マドリード（スペイン）Day 2',detail:'RIYADH AIR METROPOLITANO\n開演 20:00 CEST / 翌03:00 JST',tags:[],ticket:'https://btsworldtourofficial.com/',jst:{local:'2026/06/26(金)',diff:'JST +7h'}},
+  {id:'brussels-1',date:'2026-07-01',type:'concert',typeLabel:'🎤 CONCERT',name:'ブリュッセル（ベルギー）Day 1',detail:'KING BAUDOUIN STADIUM\n開演 20:00 CEST / 翌03:00 JST',tags:[],ticket:'https://btsworldtourofficial.com/',jst:{local:'2026/06/30(火)',diff:'JST +7h'}},
+  {id:'brussels-2',date:'2026-07-02',type:'concert',typeLabel:'🎤 CONCERT',name:'ブリュッセル（ベルギー）Day 2',detail:'KING BAUDOUIN STADIUM\n開演 20:00 CEST / 翌03:00 JST',tags:[],ticket:'https://btsworldtourofficial.com/',jst:{local:'2026/07/01(水)',diff:'JST +7h'}},
+  {id:'london-1',date:'2026-07-06',type:'concert',typeLabel:'🎤 CONCERT',name:'ロンドン（イギリス）Day 1',detail:'TOTTENHAM HOTSPUR STADIUM\n開演 20:00 BST / 翌04:00 JST',tags:[],ticket:'https://btsworldtourofficial.com/',jst:{local:'2026/07/05(日)',diff:'JST +8h'}},
+  {id:'london-2',date:'2026-07-07',type:'concert',typeLabel:'🎤 CONCERT',name:'ロンドン（イギリス）Day 2',detail:'TOTTENHAM HOTSPUR STADIUM\n開演 20:00 BST / 翌04:00 JST',tags:[],ticket:'https://btsworldtourofficial.com/',jst:{local:'2026/07/06(月)',diff:'JST +8h'}},
+  {id:'munich-1',date:'2026-07-11',type:'concert',typeLabel:'🎤 CONCERT',name:'ミュンヘン（ドイツ）Day 1',detail:'ALLIANZ ARENA\n開演 20:00 CEST / 翌03:00 JST',tags:[],ticket:'https://btsworldtourofficial.com/',jst:{local:'2026/07/10(金)',diff:'JST +7h'}},
+  {id:'munich-2',date:'2026-07-12',type:'concert',typeLabel:'🎤 CONCERT',name:'ミュンヘン（ドイツ）Day 2',detail:'ALLIANZ ARENA\n開演 20:00 CEST / 翌03:00 JST',tags:[],ticket:'https://btsworldtourofficial.com/',jst:{local:'2026/07/11(土)',diff:'JST +7h'}},
+  {id:'paris-1',date:'2026-07-17',type:'concert',typeLabel:'🎤 CONCERT',name:'パリ（フランス）Day 1',detail:'STADE DE FRANCE\n開演 20:00 CEST / 翌03:00 JST',tags:[],ticket:'https://btsworldtourofficial.com/',jst:{local:'2026/07/16(木)',diff:'JST +7h'}},
+  {id:'paris-2',date:'2026-07-18',type:'concert',typeLabel:'🎤 CONCERT',name:'パリ（フランス）Day 2',detail:'STADE DE FRANCE\n開演 20:00 CEST / 翌03:00 JST',tags:[],ticket:'https://btsworldtourofficial.com/',jst:{local:'2026/07/17(金)',diff:'JST +7h'}},
+  {id:'eastrutherford-1',date:'2026-08-01',type:'concert',typeLabel:'🎤 CONCERT',name:'イーストラザフォード（アメリカ）Day 1',detail:'METLIFE STADIUM\n開演 19:00 ET / 翌08:00 JST',tags:[],ticket:'https://btsworldtourofficial.com/',jst:{local:'2026/07/31(金)',diff:'JST +13h'}},
+  {id:'eastrutherford-2',date:'2026-08-02',type:'concert',typeLabel:'🎤 CONCERT',name:'イーストラザフォード（アメリカ）Day 2',detail:'METLIFE STADIUM\n開演 19:00 ET / 翌08:00 JST',tags:[],ticket:'https://btsworldtourofficial.com/',jst:{local:'2026/08/01(土)',diff:'JST +13h'}},
+  {id:'foxborough-1',date:'2026-08-05',type:'concert',typeLabel:'🎤 CONCERT',name:'フォックスボロ（アメリカ）Day 1',detail:'GILLETTE STADIUM\n開演 19:00 ET / 翌08:00 JST',tags:[],ticket:'https://btsworldtourofficial.com/',jst:{local:'2026/08/04(火)',diff:'JST +13h'}},
+  {id:'foxborough-2',date:'2026-08-06',type:'concert',typeLabel:'🎤 CONCERT',name:'フォックスボロ（アメリカ）Day 2',detail:'GILLETTE STADIUM\n開演 19:00 ET / 翌08:00 JST',tags:[],ticket:'https://btsworldtourofficial.com/',jst:{local:'2026/08/05(水)',diff:'JST +13h'}},
+  {id:'baltimore-1',date:'2026-08-10',type:'concert',typeLabel:'🎤 CONCERT',name:'ボルチモア（アメリカ）Day 1',detail:'M&T BANK STADIUM\n開演 19:00 ET / 翌08:00 JST',tags:[],ticket:'https://btsworldtourofficial.com/',jst:{local:'2026/08/09(日)',diff:'JST +13h'}},
+  {id:'baltimore-2',date:'2026-08-11',type:'concert',typeLabel:'🎤 CONCERT',name:'ボルチモア（アメリカ）Day 2',detail:'M&T BANK STADIUM\n開演 19:00 ET / 翌08:00 JST',tags:[],ticket:'https://btsworldtourofficial.com/',jst:{local:'2026/08/10(月)',diff:'JST +13h'}},
+  {id:'arlington-1',date:'2026-08-15',type:'concert',typeLabel:'🎤 CONCERT',name:'アーリントン（アメリカ）Day 1',detail:'AT&T STADIUM\n開演 19:00 CT / 翌09:00 JST',tags:[],ticket:'https://btsworldtourofficial.com/',jst:{local:'2026/08/14(金)',diff:'JST +14h'}},
+  {id:'arlington-2',date:'2026-08-16',type:'concert',typeLabel:'🎤 CONCERT',name:'アーリントン（アメリカ）Day 2',detail:'AT&T STADIUM\n開演 19:00 CT / 翌09:00 JST',tags:[],ticket:'https://btsworldtourofficial.com/',jst:{local:'2026/08/15(土)',diff:'JST +14h'}},
+  {id:'toronto-1',date:'2026-08-22',type:'concert',typeLabel:'🎤 CONCERT',name:'トロント（カナダ）Day 1',detail:'ROGERS STADIUM\n開演 19:00 ET / 翌08:00 JST',tags:[],ticket:'https://btsworldtourofficial.com/',jst:{local:'2026/08/21(金)',diff:'JST +13h'}},
+  {id:'toronto-2',date:'2026-08-23',type:'concert',typeLabel:'🎤 CONCERT',name:'トロント（カナダ）Day 2',detail:'ROGERS STADIUM\n開演 19:00 ET / 翌08:00 JST',tags:[],ticket:'https://btsworldtourofficial.com/',jst:{local:'2026/08/22(土)',diff:'JST +13h'}},
+  {id:'chicago-1',date:'2026-08-27',type:'concert',typeLabel:'🎤 CONCERT',name:'シカゴ（アメリカ）Day 1',detail:'SOLDIER FIELD\n開演 19:00 CT / 翌09:00 JST',tags:[],ticket:'https://btsworldtourofficial.com/',jst:{local:'2026/08/26(水)',diff:'JST +14h'}},
+  {id:'chicago-2',date:'2026-08-28',type:'concert',typeLabel:'🎤 CONCERT',name:'シカゴ（アメリカ）Day 2',detail:'SOLDIER FIELD\n開演 19:00 CT / 翌09:00 JST',tags:[],ticket:'https://btsworldtourofficial.com/',jst:{local:'2026/08/27(木)',diff:'JST +14h'}},
+  {id:'losangeles-1',date:'2026-09-01',type:'concert',typeLabel:'🎤 CONCERT',name:'ロサンゼルス（アメリカ）Day 1',detail:'SOFI STADIUM\n開演 19:00 PT / 翌11:00 JST',tags:[],ticket:'https://btsworldtourofficial.com/',jst:{local:'2026/08/31(月)',diff:'JST +16h'}},
+  {id:'losangeles-2',date:'2026-09-02',type:'concert',typeLabel:'🎤 CONCERT',name:'ロサンゼルス（アメリカ）Day 2',detail:'SOFI STADIUM\n開演 19:00 PT / 翌11:00 JST',tags:[],ticket:'https://btsworldtourofficial.com/',jst:{local:'2026/09/01(火)',diff:'JST +16h'}},
+  {id:'losangeles-3',date:'2026-09-05',type:'concert',typeLabel:'🎤 CONCERT',name:'ロサンゼルス（アメリカ）Day 3',detail:'SOFI STADIUM\n開演 19:00 PT / 翌11:00 JST',tags:[],ticket:'https://btsworldtourofficial.com/',jst:{local:'2026/09/04(金)',diff:'JST +16h'}},
+  {id:'losangeles-4',date:'2026-09-06',type:'concert',typeLabel:'🎤 CONCERT',name:'ロサンゼルス（アメリカ）Day 4',detail:'SOFI STADIUM\n開演 19:00 PT / 翌11:00 JST',tags:[],ticket:'https://btsworldtourofficial.com/',jst:{local:'2026/09/05(土)',diff:'JST +16h'}},
+  {id:'bogota-1',date:'2026-10-02',type:'concert',typeLabel:'🎤 CONCERT',name:'ボゴタ（コロンビア）Day 1',detail:'STAY TUNED\n開演 20:00 COT / 翌10:00 JST',tags:[],ticket:null,jst:{local:'2026/10/01(木)',diff:'JST +14h'}},
+  {id:'bogota-2',date:'2026-10-03',type:'concert',typeLabel:'🎤 CONCERT',name:'ボゴタ（コロンビア）Day 2',detail:'STAY TUNED\n開演 20:00 COT / 翌10:00 JST',tags:[],ticket:null,jst:{local:'2026/10/02(金)',diff:'JST +14h'}},
+  {id:'lima-1',date:'2026-10-09',type:'concert',typeLabel:'🎤 CONCERT',name:'リマ（ペルー）Day 1',detail:'STAY TUNED\n開演 20:00 PET / 翌10:00 JST',tags:[],ticket:null,jst:{local:'2026/10/08(木)',diff:'JST +14h'}},
+  {id:'lima-2',date:'2026-10-10',type:'concert',typeLabel:'🎤 CONCERT',name:'リマ（ペルー）Day 2',detail:'STAY TUNED\n開演 20:00 PET / 翌10:00 JST',tags:[],ticket:null,jst:{local:'2026/10/09(金)',diff:'JST +14h'}},
+  {id:'santiago-1',date:'2026-10-16',type:'concert',typeLabel:'🎤 CONCERT',name:'サンティアゴ（チリ）Day 1',detail:'STAY TUNED\n開演 20:00 CLT / 翌08:00 JST',tags:[],ticket:null,jst:{local:'2026/10/15(木)',diff:'JST +12h'}},
+  {id:'santiago-2',date:'2026-10-17',type:'concert',typeLabel:'🎤 CONCERT',name:'サンティアゴ（チリ）Day 2',detail:'STAY TUNED\n開演 20:00 CLT / 翌08:00 JST',tags:[],ticket:null,jst:{local:'2026/10/16(金)',diff:'JST +12h'}},
+  {id:'buenosaires-1',date:'2026-10-23',type:'concert',typeLabel:'🎤 CONCERT',name:'ブエノスアイレス（アルゼンチン）Day 1',detail:'STAY TUNED\n開演 20:00 ART / 翌08:00 JST',tags:[],ticket:null,jst:{local:'2026/10/22(木)',diff:'JST +12h'}},
+  {id:'buenosaires-2',date:'2026-10-24',type:'concert',typeLabel:'🎤 CONCERT',name:'ブエノスアイレス（アルゼンチン）Day 2',detail:'STAY TUNED\n開演 20:00 ART / 翌08:00 JST',tags:[],ticket:null,jst:{local:'2026/10/23(金)',diff:'JST +12h'}},
+  {id:'saopaulo-1',date:'2026-10-28',type:'concert',typeLabel:'🎤 CONCERT',name:'サンパウロ（ブラジル）Day 1',detail:'STAY TUNED\n開演 20:00 BRT / 翌08:00 JST',tags:[],ticket:null,jst:{local:'2026/10/27(火)',diff:'JST +12h'}},
+  {id:'saopaulo-2',date:'2026-10-30',type:'concert',typeLabel:'🎤 CONCERT',name:'サンパウロ（ブラジル）Day 2',detail:'STAY TUNED\n開演 20:00 BRT / 翌08:00 JST',tags:[],ticket:null,jst:{local:'2026/10/29(木)',diff:'JST +12h'}},
+  {id:'saopaulo-3',date:'2026-10-31',type:'concert',typeLabel:'🎤 CONCERT',name:'サンパウロ（ブラジル）Day 3',detail:'STAY TUNED\n開演 20:00 BRT / 翌08:00 JST',tags:[],ticket:null,jst:{local:'2026/10/30(金)',diff:'JST +12h'}},
+  {id:'kaohsiung-1',date:'2026-11-19',type:'concert',typeLabel:'🎤 CONCERT',name:'高雄（台湾）Day 1',detail:'STAY TUNED\n開演 19:00 CST / 20:00 JST',tags:[],ticket:null,jst:{local:'2026/11/18(水)',diff:'JST +1h'}},
+  {id:'kaohsiung-2',date:'2026-11-21',type:'concert',typeLabel:'🎤 CONCERT',name:'高雄（台湾）Day 2',detail:'STAY TUNED\n開演 19:00 CST / 20:00 JST',tags:[],ticket:null,jst:{local:'2026/11/20(金)',diff:'JST +1h'}},
+  {id:'kaohsiung-3',date:'2026-11-22',type:'concert',typeLabel:'🎤 CONCERT',name:'高雄（台湾）Day 3',detail:'STAY TUNED\n開演 19:00 CST / 20:00 JST',tags:[],ticket:null,jst:{local:'2026/11/21(土)',diff:'JST +1h'}},
+  {id:'bangkok-1',date:'2026-12-03',type:'concert',typeLabel:'🎤 CONCERT',name:'バンコク（タイ）Day 1',detail:'STAY TUNED\n開演 19:00 ICT / 21:00 JST',tags:[],ticket:null,jst:{local:'2026/12/02(水)',diff:'JST +2h'}},
+  {id:'bangkok-2',date:'2026-12-05',type:'concert',typeLabel:'🎤 CONCERT',name:'バンコク（タイ）Day 2',detail:'STAY TUNED\n開演 19:00 ICT / 21:00 JST',tags:[],ticket:null,jst:{local:'2026/12/04(金)',diff:'JST +2h'}},
+  {id:'bangkok-3',date:'2026-12-06',type:'concert',typeLabel:'🎤 CONCERT',name:'バンコク（タイ）Day 3',detail:'STAY TUNED\n開演 19:00 ICT / 21:00 JST',tags:[],ticket:null,jst:{local:'2026/12/05(土)',diff:'JST +2h'}},
+  {id:'kl-1',date:'2026-12-12',type:'concert',typeLabel:'🎤 CONCERT',name:'クアラルンプール（マレーシア）Day 1',detail:'STAY TUNED\n開演 19:00 MYT / 20:00 JST',tags:[],ticket:null,jst:{local:'2026/12/11(金)',diff:'JST +1h'}},
+  {id:'kl-2',date:'2026-12-13',type:'concert',typeLabel:'🎤 CONCERT',name:'クアラルンプール（マレーシア）Day 2',detail:'STAY TUNED\n開演 19:00 MYT / 20:00 JST',tags:[],ticket:null,jst:{local:'2026/12/12(土)',diff:'JST +1h'}},
+  {id:'singapore-1',date:'2026-12-17',type:'concert',typeLabel:'🎤 CONCERT',name:'シンガポール Day 1',detail:'STAY TUNED\n開演 19:00 SGT / 20:00 JST',tags:[],ticket:null,jst:{local:'2026/12/16(水)',diff:'JST +1h'}},
+  {id:'singapore-2',date:'2026-12-19',type:'concert',typeLabel:'🎤 CONCERT',name:'シンガポール Day 2',detail:'STAY TUNED\n開演 19:00 SGT / 20:00 JST',tags:[],ticket:null,jst:{local:'2026/12/18(金)',diff:'JST +1h'}},
+  {id:'singapore-3',date:'2026-12-20',type:'concert',typeLabel:'🎤 CONCERT',name:'シンガポール Day 3',detail:'STAY TUNED\n開演 19:00 SGT / 20:00 JST',tags:[],ticket:null,jst:{local:'2026/12/19(土)',diff:'JST +1h'}},
+  {id:'singapore-4',date:'2026-12-22',type:'concert',typeLabel:'🎤 CONCERT',name:'シンガポール Day 4',detail:'STAY TUNED\n開演 19:00 SGT / 20:00 JST',tags:[],ticket:null,jst:{local:'2026/12/21(月)',diff:'JST +1h'}},
+  {id:'jakarta-1',date:'2026-12-26',type:'concert',typeLabel:'🎤 CONCERT',name:'ジャカルタ（インドネシア）Day 1',detail:'STAY TUNED\n開演 19:00 WIB / 21:00 JST',tags:[],ticket:null,jst:{local:'2026/12/25(金)',diff:'JST +2h'}},
+  {id:'jakarta-2',date:'2026-12-27',type:'concert',typeLabel:'🎤 CONCERT',name:'ジャカルタ（インドネシア）Day 2',detail:'STAY TUNED\n開演 19:00 WIB / 21:00 JST',tags:[],ticket:null,jst:{local:'2026/12/26(土)',diff:'JST +2h'}},
+  {id:'melbourne-1',date:'2027-02-12',type:'concert',typeLabel:'🎤 CONCERT',name:'メルボルン（オーストラリア）Day 1',detail:'STAY TUNED\n開演 19:00 AEDT / 17:00 JST',tags:['global'],ticket:null,jst:{local:'2027/02/12(金)',diff:'JST -2h'}},
+  {id:'melbourne-2',date:'2027-02-13',type:'concert',typeLabel:'🎤 CONCERT',name:'メルボルン（オーストラリア）Day 2',detail:'STAY TUNED\n開演 19:00 AEDT / 17:00 JST',tags:['global'],ticket:null,jst:{local:'2027/02/13(土)',diff:'JST -2h'}},
+  {id:'sydney-1',date:'2027-02-20',type:'concert',typeLabel:'🎤 CONCERT',name:'シドニー（オーストラリア）Day 1',detail:'STAY TUNED\n開演 19:00 AEDT / 17:00 JST',tags:['global'],ticket:null,jst:{local:'2027/02/20(土)',diff:'JST -2h'}},
+  {id:'sydney-2',date:'2027-02-21',type:'concert',typeLabel:'🎤 CONCERT',name:'シドニー（オーストラリア）Day 2',detail:'STAY TUNED\n開演 19:00 AEDT / 17:00 JST',tags:['global'],ticket:null,jst:{local:'2027/02/21(日)',diff:'JST -2h'}},
+  {id:'hongkong-1',date:'2027-03-04',type:'concert',typeLabel:'🎤 CONCERT',name:'香港 Day 1',detail:'STAY TUNED\n開演 19:00 HKT / 20:00 JST',tags:[],ticket:null,jst:{local:'2027/03/03(水)',diff:'JST +1h'}},
+  {id:'hongkong-2',date:'2027-03-06',type:'concert',typeLabel:'🎤 CONCERT',name:'香港 Day 2',detail:'STAY TUNED\n開演 19:00 HKT / 20:00 JST',tags:[],ticket:null,jst:{local:'2027/03/05(金)',diff:'JST +1h'}},
+  {id:'hongkong-3',date:'2027-03-07',type:'concert',typeLabel:'🎤 CONCERT',name:'香港 Day 3',detail:'STAY TUNED\n開演 19:00 HKT / 20:00 JST',tags:[],ticket:null,jst:{local:'2027/03/06(土)',diff:'JST +1h'}},
+  {id:'manila-1',date:'2027-03-13',type:'concert',typeLabel:'🎤 CONCERT',name:'マニラ（フィリピン）Day 1',detail:'STAY TUNED\n開演 19:00 PHT / 20:00 JST',tags:[],ticket:null,jst:{local:'2027/03/12(金)',diff:'JST +1h'}},
+  {id:'manila-2',date:'2027-03-14',type:'concert',typeLabel:'🎤 CONCERT',name:'マニラ（フィリピン）Day 2',detail:'STAY TUNED\n開演 19:00 PHT / 20:00 JST',tags:[],ticket:null,jst:{local:'2027/03/13(土)',diff:'JST +1h'}},
+];
+EVENTS.sort((a,b)=>new Date(a.date)-new Date(b.date));
+
+// ====== MEMO STORE ======
+const MEMO_KEY = 'bts_arirang_memos_v3';
+let memoStore = {};
+try { memoStore = JSON.parse(localStorage.getItem(MEMO_KEY)||'{}'); } catch(e){}
+function saveMemo(id,text){ if(text.trim()) memoStore[id]=text; else delete memoStore[id]; try{localStorage.setItem(MEMO_KEY,JSON.stringify(memoStore));}catch(e){} }
+
+// ====== HELPERS ======
+function daysUntil(d){ const t=new Date(d+'T00:00:00'); t.setHours(0,0,0,0); return Math.round((t-TODAY)/86400000); }
+function typeColor(t){ return{concert:'var(--red)','ticket-jp':'var(--gold)','ticket-global':'var(--blue)',result:'var(--green)',album:'var(--purple)',special:'var(--orange)'}[t]||'var(--border)'; }
+function fmtDate(d){
+  const dt=new Date(d+'T00:00:00');
+  const MON=['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+  const DOW=['SUN','MON','TUE','WED','THU','FRI','SAT'];
+  return{mon:MON[dt.getMonth()],day:dt.getDate(),dow:DOW[dt.getDay()],year:dt.getFullYear()};
+}
+
+// ====== CARD BUILDER ======
+function buildCard(ev){
+  const uid=ev.id;
+  const diff=daysUntil(ev.date);
+  const isPassed=diff<0, isToday=diff===0;
+  const fd=fmtDate(ev.date);
+  const hasMemo=!!memoStore[ev.id];
+  const color=typeColor(ev.type);
+
+  // Days badge
+  let badge='';
+  if(isToday) badge=`<span class="days-badge badge-today">TODAY</span>`;
+  else if(!isPassed){
+    if(diff<=3) badge=`<span class="days-badge badge-verysoon">あと${diff}日</span>`;
+    else if(diff<=14) badge=`<span class="days-badge badge-soon">あと${diff}日</span>`;
+    else badge=`<span class="days-badge badge-normal">あと${diff}日</span>`;
+  } else badge=`<span class="days-badge badge-passed">終了</span>`;
+
+  // Ticket button
+  let ticketHtml='';
+  if(ev.ticket) ticketHtml=`<a href="${ev.ticket}" target="_blank" rel="noopener" class="ticket-link" onclick="(function(e){e.stopPropagation();})(arguments[0]||window.event)">🎫 チケット</a>`;
+  else if(ev.type==='concert') ticketHtml=`<span class="ticket-link tba">TBA</span>`;
+
+  // JST row — show for all overseas concerts
+  let jstHtml='';
+  if(ev.jst){
+    const diff=ev.jst.diff;
+    // Parse diff to human-readable
+    let diffLabel='';
+    if(diff==='JST +0h') diffLabel='韓国・日本と同じ時間帯';
+    else if(diff.startsWith('JST +')) {
+      const h=parseInt(diff.replace('JST +','').replace('h',''));
+      diffLabel=`日本より${h}時間遅い`;
+    } else if(diff.startsWith('JST -')) {
+      const h=parseInt(diff.replace('JST -','').replace('h',''));
+      diffLabel=`日本より${h}時間早い`;
+    }
+    if(diff!=='JST +0h'){
+      jstHtml=`<div class="jst-row"><span class="jst-flag">🇯🇵</span><span class="jst-text">日本時間: <strong>${ev.jst.local}</strong></span><span class="jst-diff">${diffLabel}</span></div>`;
+    }
+  }
+
+  // Detail
+  const detailHtml=ev.detail?(ev.detail.split('\n').map(l=>`<span class="detail-line">${l}</span>`).join('')):'';
+  // Tags
+  const tagMap={jp:'🇯🇵 JP',global:'GLOBAL',fc:'FC会員',mobile:'MOBILE',army:'ARMY',free:'無料'};
+  const tagsHtml=(ev.tags||[]).map(t=>`<span class="tag tag-${t}">${tagMap[t]||t}</span>`).join('');
+  // Memo
+  const memoVal=(memoStore[ev.id]||'').replace(/"/g,'&quot;');
+
+  return `<div class="event-card ${ev.type}${isPassed?' passed':''}${isToday?' today':''}" data-evid="${ev.id}">
+  <div class="card-stripe" style="background:${color}"></div>
+  <div class="card-date">
+    <div class="card-date-mon">${fd.mon}</div>
+    <div class="card-date-day">${fd.day}</div>
+    <div class="card-date-dow">${fd.dow}</div>
+    ${fd.year===2027?`<div class="card-date-year">'27</div>`:''}
+  </div>
+  <div class="card-body">
+    <div class="card-top">
+      <span class="card-type">${ev.typeLabel}</span>
+      ${badge}
+    </div>
+    <div class="card-name">${ev.name}${hasMemo?'<span class="memo-dot"></span>':''}</div>
+    ${detailHtml?`<div class="card-detail">${detailHtml}</div>`:''}
+    ${jstHtml}
+    ${tagsHtml?`<div class="card-tags">${tagsHtml}</div>`:''}
+    ${ticketHtml?`<div class="card-actions">${ticketHtml}</div>`:''}
+    <div class="memo-area">
+      <div class="memo-label">MY MEMO</div>
+      <textarea class="memo-input" rows="3" placeholder="メモを書く...">${memoVal}</textarea>
+      <div class="memo-row">
+        <button class="memo-save-btn">保存</button>
+        <span class="memo-saved-msg">✓ 保存しました</span>
+      </div>
+    </div>
+  </div>
+</div>`;
+}
+
+// イベント委譲 — ページ全体で一つのリスナーが全カードを処理
+document.addEventListener('click', function(e){
+  // チケットリンクはそのままブラウザに渡す
+  if(e.target.closest('.ticket-link')) return;
+
+  // 保存ボタン
+  if(e.target.classList.contains('memo-save-btn')){
+    e.stopPropagation();
+    const card = e.target.closest('.event-card');
+    if(!card) return;
+    const evId = card.dataset.evid;
+    const area = card.querySelector('.memo-area');
+    const ta   = area.querySelector('.memo-input');
+    const msg  = area.querySelector('.memo-saved-msg');
+    saveMemo(evId, ta.value);
+    const nameEl = card.querySelector('.card-name');
+    const dot = nameEl.querySelector('.memo-dot');
+    if(ta.value.trim()){ if(!dot) nameEl.insertAdjacentHTML('beforeend','<span class="memo-dot"></span>'); }
+    else if(dot) dot.remove();
+    msg.style.display='inline';
+    setTimeout(()=>{ msg.style.display='none'; }, 2000);
+    if(currentTab==='memos') renderMemos();
+    return;
+  }
+
+  // textarea 内クリックはスルー
+  if(e.target.tagName==='TEXTAREA') return;
+
+  // カード本体クリック → メモ開閉
+  const card = e.target.closest('.event-card');
+  if(!card) return;
+  const area = card.querySelector('.memo-area');
+  if(!area) return;
+  const isOpen = area.classList.contains('open');
+  document.querySelectorAll('.memo-area.open').forEach(m => m.classList.remove('open'));
+  if(!isOpen) area.classList.add('open');
+});
+
+
+
+// ====== TAB + FILTER ======
+let currentTab='all', currentFilter='all';
+
+function showTab(tab){
+  currentTab=tab;
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>{
+    if(t.getAttribute('onclick')&&t.getAttribute('onclick').includes("'"+tab+"'")) t.classList.add('active');
+  });
+  ['all','ticket','concert','memos'].forEach(id=>{
+    const el=document.getElementById('tab-'+id);
+    if(el) el.style.display=(id===tab)?'':'none';
+  });
+  if(tab==='all') renderTimeline('timeline-all',null);
+  if(tab==='ticket') renderTimeline('timeline-ticket',e=>e.type.startsWith('ticket')||e.type==='result');
+  if(tab==='concert') renderTimeline('timeline-concert',e=>e.type==='concert'||e.type==='album'||e.type==='special');
+  if(tab==='memos') renderMemos();
+}
+
+function setFilter(f,btn){
+  currentFilter=f;
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderTimeline('timeline-all',null);
+}
+
+function renderTimeline(containerId,filterFn){
+  const tabKey = containerId.replace('timeline-','');
+  const el=document.getElementById(containerId);
+  if(!el) return;
+  let evs=[...EVENTS];
+  if(filterFn) evs=evs.filter(filterFn);
+  if(containerId==='timeline-all'){
+    if(currentFilter==='passed') evs=evs.filter(e=>daysUntil(e.date)<0);
+    if(currentFilter==='upcoming') evs=evs.filter(e=>daysUntil(e.date)>=0);
+  }
+  if(!evs.length){
+    el.innerHTML='<div class="empty-state"><div class="empty-icon">🌙</div><div class="empty-text">該当するイベントがありません</div></div>';
+    return;
+  }
+  let html='', lastMonth='';
+  evs.forEach((ev,i)=>{
+    const d=new Date(ev.date+'T00:00:00');
+    const mkey=d.getFullYear()+'-'+d.getMonth();
+    if(mkey!==lastMonth){
+      lastMonth=mkey;
+      const mnames=['January','February','March','April','May','June','July','August','September','October','November','December'];
+      html+=`<div class="month-divider"><span>${mnames[d.getMonth()]} ${d.getFullYear()}</span></div>`;
+    }
+    html+=buildCard(ev, tabKey);
+  });
+  el.innerHTML=html;
+}
+
+function renderMemos(){
+  const el=document.getElementById('memo-list');
+  if(!el) return;
+  const entries=Object.entries(memoStore).filter(([,v])=>v&&v.trim());
+  if(!entries.length){
+    el.innerHTML='<div class="empty-state"><div class="empty-icon">📝</div><div class="empty-text">まだメモがありません<br>カードをタップしてメモを追加できます</div></div>';
+    return;
+  }
+  let html='';
+  entries.forEach(([id,text])=>{
+    const ev=EVENTS.find(e=>e.id===id);
+    if(!ev) return;
+    const fd=fmtDate(ev.date);
+    html+=`<div class="memo-entry" style="border-left-color:${typeColor(ev.type)}">
+      <div class="memo-entry-date">${fd.mon} ${fd.day}, ${fd.year}</div>
+      <div class="memo-entry-name">${ev.name}</div>
+      <div class="memo-entry-text">${text.replace(/</g,'&lt;')}</div>
+    </div>`;
+  });
+  el.innerHTML=html;
+}
+
+// ====== COUNTDOWN ======
+function updateCountdown(){
+  const el=document.getElementById('days-to-start');
+  if(!el) return;
+  const d=daysUntil('2026-04-09');
+  el.textContent=d>0?d:(d===0?'TODAY':'開幕済');
+}
+
+// ====== SCROLL TOP ======
+window.addEventListener('scroll',()=>{
+  const btn=document.getElementById('scroll-top');
+  if(btn) btn.classList.toggle('visible',window.scrollY>400);
+});
+
+// ====== CALENDAR ======
+let calYear=null,calMonth=null;
+
+function toggleCalendarPanel(){
+  const panel=document.getElementById('cal-panel');
+  const btn=document.getElementById('cal-toggle-btn');
+  const open=panel.classList.toggle('open');
+  btn.classList.toggle('active',open);
+  if(open){
+    if(!calYear) initCalendar(); else renderCalendar();
+    setTimeout(()=>panel.scrollIntoView({behavior:'smooth',block:'start'}),50);
+  }
+}
+
+function initCalendar(){
+  const now=new Date();
+  calYear=now.getFullYear(); calMonth=now.getMonth();
+  document.getElementById('cal-prev').addEventListener('click',()=>{ calMonth--; if(calMonth<0){calMonth=11;calYear--;} renderCalendar(); });
+  document.getElementById('cal-next').addEventListener('click',()=>{ calMonth++; if(calMonth>11){calMonth=0;calYear++;} renderCalendar(); });
+  renderCalendar();
+}
+
+function renderCalendar(){
+  const MNAMES=['January','February','March','April','May','June','July','August','September','October','November','December'];
+  document.getElementById('cal-month-label').textContent=MNAMES[calMonth]+' '+calYear;
+  const grid=document.getElementById('cal-grid');
+  const DOWS=['SUN','MON','TUE','WED','THU','FRI','SAT'];
+  let html=DOWS.map(d=>`<div class="cal-dow">${d}</div>`).join('');
+  const first=new Date(calYear,calMonth,1).getDay();
+  const days=new Date(calYear,calMonth+1,0).getDate();
+  const todayStr=TODAY.toISOString().slice(0,10);
+  for(let i=0;i<first;i++) html+='<div class="cal-day empty"></div>';
+  for(let d=1;d<=days;d++){
+    const ds=calYear+'-'+String(calMonth+1).padStart(2,'0')+'-'+String(d).padStart(2,'0');
+    const dayEvs=EVENTS.filter(e=>e.date===ds);
+    const cls=['cal-day',dayEvs.length?'has-events':'',ds===todayStr?'is-today':''].filter(Boolean).join(' ');
+    const dots=dayEvs.map(e=>`<div class="cal-dot" style="background:${typeColor(e.type)}"></div>`).join('');
+    const oc=dayEvs.length?`onclick="openCalPopup('${ds}')"` :'';
+    html+=`<div class="${cls}" ${oc}><div class="cal-day-num">${d}</div><div class="cal-dots">${dots}</div></div>`;
+  }
+  grid.innerHTML=html;
+}
+
+function openCalPopup(ds){
+  const dayEvs=EVENTS.filter(e=>e.date===ds);
+  if(!dayEvs.length) return;
+  const d=new Date(ds+'T00:00:00');
+  const MNAMES=['January','February','March','April','May','June','July','August','September','October','November','December'];
+  const DOWS=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  document.getElementById('cal-popup-date').textContent=DOWS[d.getDay()]+', '+MNAMES[d.getMonth()]+' '+d.getDate();
+  document.getElementById('cal-popup-events').innerHTML=dayEvs.map(ev=>`
+    <div class="cal-popup-event" onclick="jumpToEvent('${ev.id}')">
+      <div class="cal-popup-event-bar" style="background:${typeColor(ev.type)}"></div>
+      <div style="flex:1">
+        <div class="cal-popup-event-type">${ev.typeLabel}</div>
+        <div class="cal-popup-event-name">${ev.name}</div>
+      </div>
+      <div class="cal-popup-arrow">›</div>
+    </div>`).join('');
+  document.getElementById('cal-popup').classList.add('open');
+  document.getElementById('cal-overlay').classList.add('open');
+}
+
+function closeCalPopup(){
+  document.getElementById('cal-popup').classList.remove('open');
+  document.getElementById('cal-overlay').classList.remove('open');
+}
+
+function jumpToEvent(evId){
+  // 1) ポップアップを閉じる
+  closeCalPopup();
+  // 2) カレンダーパネルも閉じる
+  const panel=document.getElementById('cal-panel');
+  const calBtn=document.getElementById('cal-toggle-btn');
+  panel.classList.remove('open');
+  calBtn.classList.remove('active');
+  // 3) 対象タブに切り替え
+  const ev=EVENTS.find(e=>e.id===evId);
+  if(!ev) return;
+  const tab=ev.type==='concert'||ev.type==='album'||ev.type==='special'?'concert'
+            :ev.type.startsWith('ticket')||ev.type==='result'?'ticket':'all';
+  showTab(tab);
+  // 4) DOMが確実に描画された後にスクロール
+  requestAnimationFrame(()=>{
+    requestAnimationFrame(()=>{
+      const activeTabId = 'tab-' + tab;
+      const activeTab = document.getElementById(activeTabId);
+      const card = activeTab ? activeTab.querySelector('[data-evid="'+evId+'"]') : null;
+      if(card){
+        const y = card.getBoundingClientRect().top + window.scrollY - 70;
+        window.scrollTo({top: y, behavior:'smooth'});
+        card.style.outline='2px solid var(--red)';
+        setTimeout(()=>{ card.style.outline=''; },2500);
+      }
+    });
+  });
+}
+
+// ====== INIT ======
+updateCountdown();
+showTab('all');
+</script>
+</body>
+</html>
