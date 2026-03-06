@@ -540,27 +540,11 @@ body{
 }
 
 /* JST row */
-.jst-row{
-  display:flex;
-  align-items:center;
-  gap:7px;
-  margin-top:6px;
-  background:rgba(255,255,255,.03);
-  border:1px solid rgba(255,255,255,.06);
-  border-radius:4px;
-  padding:5px 10px;
-}
+.jst-row{display:flex;flex-wrap:wrap;align-items:center;gap:4px 8px;margin-top:6px;padding:6px 8px;background:rgba(255,255,255,.04);border-radius:6px;font-size:11px;}
 .jst-flag{font-size:12px;line-height:1;}
-.jst-text{font-size:11px;color:var(--sub);}
+.jst-text{color:var(--sub);flex-wrap:wrap;word-break:keep-all;}
 .jst-text strong{color:var(--text);font-weight:500;}
-.jst-diff{
-  margin-left:auto;
-  font-family:'DM Mono',monospace;
-  font-size:10px;
-  color:var(--gold);
-  letter-spacing:.08em;
-  flex-shrink:0;
-}
+.jst-diff{color:var(--gold);font-size:10px;white-space:nowrap;}
 
 /* Tags */
 .card-tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:5px;}
@@ -834,12 +818,13 @@ body{
       <div class="legend-item"><div class="legend-dot" style="background:var(--gold)"></div>日本チケット</div>
       <div class="legend-item"><div class="legend-dot" style="background:var(--blue)"></div>グローバルチケット</div>
       <div class="legend-item"><div class="legend-dot" style="background:var(--green)"></div>当落発表</div>
-      <div class="legend-item"><div class="legend-dot" style="background:var(--purple)"></div>アルバム・特別</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--purple)"></div>アルバム</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--orange)"></div>特別イベント</div>
     </div>
     <div class="filter-bar">
-      <button class="filter-btn active" onclick="setFilter('all',this)">ALL</button>
+      <button class="filter-btn" onclick="setFilter('all',this)">ALL</button>
+      <button class="filter-btn active" onclick="setFilter('upcoming',this)">今後の予定</button>
       <button class="filter-btn" onclick="setFilter('passed',this)">終了済み</button>
-      <button class="filter-btn" onclick="setFilter('upcoming',this)">今後の予定</button>
     </div>
     <div class="timeline" id="timeline-all"></div>
   </div>
@@ -873,7 +858,7 @@ body{
   <div id="tab-special" style="display:none">
     <div class="legend">
       <div class="legend-item"><div class="legend-dot" style="background:var(--purple)"></div>アルバム</div>
-      <div class="legend-item"><div class="legend-dot" style="background:var(--green)"></div>特別イベント・LV</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--orange)"></div>特別イベント・LV</div>
     </div>
     <div class="filter-bar">
       <button class="filter-btn" id="special-filter-all" onclick="setTabFilter('special','all',this)">ALL</button>
@@ -1186,7 +1171,7 @@ document.addEventListener('click', function(e){
 
 // ====== TAB + FILTER ======
 let currentTab='all', currentFilter='all';
-const tabFilters = {all:'all', ticket:'upcoming', concert:'upcoming', special:'upcoming'};
+const tabFilters = {all:'upcoming', ticket:'upcoming', concert:'upcoming', special:'upcoming'};
 
 function showTab(tab){
   currentTab=tab;
