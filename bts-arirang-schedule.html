@@ -873,7 +873,12 @@ body{
   <div id="tab-special" style="display:none">
     <div class="legend">
       <div class="legend-item"><div class="legend-dot" style="background:var(--purple)"></div>アルバム</div>
-      <div class="legend-item"><div class="legend-dot" style="background:var(--orange)"></div>特別イベント</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--green)"></div>特別イベント・LV</div>
+    </div>
+    <div class="filter-bar">
+      <button class="filter-btn" id="special-filter-all" onclick="setTabFilter('special','all',this)">ALL</button>
+      <button class="filter-btn active" id="special-filter-upcoming" onclick="setTabFilter('special','upcoming',this)">今後の予定</button>
+      <button class="filter-btn" id="special-filter-passed" onclick="setTabFilter('special','passed',this)">終了済み</button>
     </div>
     <div class="timeline" id="timeline-special"></div>
   </div>
@@ -1181,7 +1186,7 @@ document.addEventListener('click', function(e){
 
 // ====== TAB + FILTER ======
 let currentTab='all', currentFilter='all';
-const tabFilters = {all:'all', ticket:'upcoming', concert:'upcoming', special:'all'};
+const tabFilters = {all:'all', ticket:'upcoming', concert:'upcoming', special:'upcoming'};
 
 function showTab(tab){
   currentTab=tab;
@@ -1216,6 +1221,7 @@ function setTabFilter(tab,f,btn){
   btn.classList.add('active');
   if(tab==='ticket') renderTimeline('timeline-ticket',e=>e.type.startsWith('ticket')||e.type==='result');
   if(tab==='concert') renderTimeline('timeline-concert',e=>e.type==='concert');
+  if(tab==='special') renderTimeline('timeline-special',e=>e.type==='album'||e.type==='special');
 }
 
 function renderTimeline(containerId,filterFn){
