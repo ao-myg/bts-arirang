@@ -890,6 +890,7 @@ body{
     letter-spacing:.12em;
     line-height:1.9;
   ">
+    <span id="last-updated" style="display:block;margin-bottom:6px;color:#555;"></span>
     制作：<a href="https://twitter.com/ao_mygmm" target="_blank" rel="noopener" style="color:#666;text-decoration:none;">@ao_mygmm</a>　本ツールは個人が制作した非公式のものです。掲載情報の正確性は保証できませんので、参考用としてご利用ください。無断転載・再配布はご遠慮ください。
   </p>
 </footer>
@@ -907,6 +908,9 @@ const EVENTS = [
   {id:'album-release',date:'2026-03-20',type:'album',typeLabel:'ALBUM RELEASE',name:'BTS 5th Album「ARIRANG」リリース',detail:'韓国：3月20日（金）13:00 KST\n日本：3月21日（土）CDショップ店頭・オンライン順次\n全14曲収録 / Deluxe Vinylのみ4月3日発売',tags:['global']},
   {id:'comeback-live',date:'2026-03-21',type:'special',typeLabel:'SPECIAL EVENT',name:'BTS THE COMEBACK LIVE | ARIRANG',detail:'20:00 KST / 光化門広場（ソウル）\n全席無料・要予約（NOLチケット 2/23 20:00〜）\nNetflix 190か国以上で世界同時独占生中継\n所要時間：約1時間',tags:['free']},
   {id:'documentary',date:'2026-03-27',type:'special',typeLabel:'DOCUMENTARY',name:'ドキュメンタリー映画「BTS: THE RETURN」Netflix配信開始',detail:'軍服務後の再会〜「ARIRANG」制作過程を密着\nNetflix独占・約3年9ヶ月ぶりの完全体カムバックの舞台裏',tags:[]},
+  // MERCHANDISE
+  {id:'merch-preorder1',date:'2026-03-12',type:'special',typeLabel:'🛍 MERCHANDISE',name:'OFFICIAL MERCHANDISE 先行販売開始',detail:'11:00〜 / BTS Weverse Shop\nHoodie (Red/Black) / Ball Cap (Red/Black)\n発送：2026年4月中旬〜順次',tags:['global'],ticket:'https://weverseshop.io/'},
+  {id:'merch-preorder2',date:'2026-03-20',type:'special',typeLabel:'🛍 MERCHANDISE',name:'OFFICIAL MERCHANDISE 全商品販売開始',detail:'14:00〜 / BTS Weverse Shop\nT-Shirt / Poster / Mug / Shoulder Bag / Card Holder 他\n発送：2026年5月初旬〜順次 / 1会計各3個まで',tags:['global'],ticket:'https://weverseshop.io/'},
   // JAPAN TICKETS
   {id:'jp-fc1-start',date:'2026-01-22',type:'ticket-jp',typeLabel:'チケット申し込み',name:'🇯🇵 FC会員 1次先行 受付開始',detail:'21:00〜 / ローソンチケット\nBTS JAPAN OFFICIAL FANCLUB会員対象',tags:['jp','fc']},
   {id:'jp-fc1-end',date:'2026-01-29',type:'ticket-jp',typeLabel:'チケット申し込み',name:'🇯🇵 FC会員 1次先行 受付終了',detail:'23:59まで',tags:['jp','fc']},
@@ -1057,8 +1061,14 @@ function buildCard(ev){
 
   // Ticket button
   let ticketHtml='';
-  if(ev.ticket) ticketHtml=`<a href="${ev.ticket}" target="_blank" rel="noopener" class="ticket-link" onclick="(function(e){e.stopPropagation();})(arguments[0]||window.event)">🎫 チケット</a>`;
-  else if(ev.type==='concert') ticketHtml=`<span class="ticket-link tba">TBA</span>`;
+  if(ev.ticket){
+    const btnLabel = ev.type==='special' && ev.typeLabel && ev.typeLabel.includes('MERCHANDISE')
+      ? '🛍 Weverse Shop'
+      : ev.type==='special' && ev.typeLabel && ev.typeLabel.includes('LIVE VIEWING')
+      ? '🎬 チケット'
+      : '🎫 チケット';
+    ticketHtml=`<a href="${ev.ticket}" target="_blank" rel="noopener" class="ticket-link" onclick="(function(e){e.stopPropagation();})(arguments[0]||window.event)">${btnLabel}</a>`;
+  } else if(ev.type==='concert') ticketHtml=`<span class="ticket-link tba">TBA</span>`;
 
   // JST row — show for all overseas concerts
   let jstHtml='';
@@ -1375,6 +1385,23 @@ function jumpToEvent(evId){
 // ====== INIT ======
 updateCountdown();
 showTab('all');
+
+// 最終更新日表示（ファイルの更新日時を自動取得）
+(function() {
+  try {
+    const lm = document.lastModified; // "MM/DD/YYYY HH:MM:SS"
+    const d = new Date(lm);
+    // JSTに変換
+    const jst = new Date(d.getTime() + (9 * 60 * 60 * 1000));
+    const y = jst.getUTCFullYear();
+    const mo = String(jst.getUTCMonth() + 1).padStart(2, '0');
+    const day = String(jst.getUTCDate()).padStart(2, '0');
+    const h = String(jst.getUTCHours()).padStart(2, '0');
+    const mi = String(jst.getUTCMinutes()).padStart(2, '0');
+    const el = document.getElementById('last-updated');
+    if (el) el.textContent = `最終更新：${y}/${mo}/${day} ${h}:${mi} JST`;
+  } catch(e) {}
+})();
 </script>
 </body>
 </html>
